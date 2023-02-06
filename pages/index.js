@@ -21,13 +21,26 @@ const DUMMY_MEETUPS = [
 const HomePage=(props)=>{
  return <MeetupList meetups={props.meetups}/>
 }
-
-export async function getStaticProps(){
-return{
-  props:{
-    meetups:DUMMY_MEETUPS
+//get static props
+// export async function getStaticProps(){
+//   //will used to fetch data from api or database
+// return{
+//   props:{
+//     meetups:DUMMY_MEETUPS
+//   },
+//   //it will run after every 10 sec so that if new data added then it will tackle that(after deployement)
+//   revalidate:10
+// }
+// }
+//get server side
+ export async function getServerSideProps(context){
+  const req=context.req;
+  const res=context.res;
+  return{
+    props:{
+      meetups:DUMMY_MEETUPS
+    }
   }
-}
-}
+ }
 
 export default HomePage
